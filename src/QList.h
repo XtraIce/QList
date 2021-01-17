@@ -117,9 +117,9 @@ void QList<T>::pop_front()
 		node *tmp = start;
 		start = start->next;
 		if(start!=NULL) // Re-link next item to NULL
-		start->prev = NULL;
+			start->prev = NULL;
 		else // List became empty so we need to clear end
-		end = NULL;
+			end = NULL;
 		delete tmp;
 		len--; // Decrease counter
 	}
@@ -134,9 +134,9 @@ void QList<T>::pop_back()
 		node *tmp = end;
 		end = end->prev;
 		if(end!=NULL) //Re-link previous item to NULL
-		end->next = NULL;
+			end->next = NULL;
 		else // List became empty so we need to clear start
-		start = NULL;
+			start = NULL;
 		delete tmp;
 		len--; // Decrease counter
 	}
@@ -147,7 +147,7 @@ template<class T>
 T QList<T>::front()
 {
 	if(start!=NULL)
-	return start->item;
+		return start->item;
 	//TODO: Catch error when list is empty
 }
 
@@ -156,7 +156,7 @@ template<class T>
 T QList<T>::back()
 {
 	if(end!=NULL)
-	return end->item;
+		return end->item;
 	//TODO: Catch error when list is empty
 }
 
@@ -190,21 +190,21 @@ void QList<T>::clear(unsigned int index)
 		if(i==index)
 		{
 			if(tmp->prev!=NULL)
-			tmp->prev->next = tmp->next;
+				tmp->prev->next = tmp->next;
 			else
-			start = tmp->next;
+				start = tmp->next;
 
 			if(tmp->next!=NULL)
-			tmp->next->prev = tmp->prev;
+				tmp->next->prev = tmp->prev;
 			else
-			end = tmp->prev;
+				end = tmp->prev;
 
 			len--; // Decrease counter
 			delete tmp; // Delete item
 			break;
 		}
 		else
-		tmp=tmp->next;
+			tmp=tmp->next;
 	}
 }
 
@@ -213,28 +213,30 @@ template<class T>
 T QList<T>::get(unsigned int index)
 {
 	node *tmp = start;
-	for(int i=0;i<=index&&tmp!=NULL;i++)
+	for(unsigned int i=0;i<=index&&tmp!=NULL;i++)
 	{
 		if(i==index)
-		return tmp->item;
+			break;
 		else
-		tmp=tmp->next;
+			tmp=tmp->next;
 	}
 	//TODO: Catch error when index is out of range
+	return tmp->item;
 }
 
 template<class T>
 T& QList<T>::at(unsigned int index)
 {
 	node *tmp = start;
-	for(int i=0;i<=index&&tmp!=NULL;i++)
+	for(unsigned int i=0;i<=index&&tmp!=NULL;i++)
 	{
 		if(i==index)
-		return tmp->item;
+			break;
 		else
-		tmp=tmp->next;
+			tmp=tmp->next;
 	}
 	//TODO: Catch error when index is out of range
+	return tmp->item;
 }
 
 // Get length
@@ -249,8 +251,8 @@ template<class T>
 int QList<T>::indexOf(T val)
 {
 	for(int i=0;i<this->size();i++)
-	if(this->at(i) == val)
-	return i;
+		if(this->at(i) == val)
+			return i;
 	return -1;
 }
 
@@ -259,14 +261,15 @@ template<class T>
 T& QList<T>::operator[](unsigned int index)
 {
 	node *tmp = start;
-	for(int i=0;i<=index&&tmp!=NULL;i++)
+	for(unsigned int i=0;i<=index&&tmp!=NULL;i++)
 	{
 		if(i==index)
-		return tmp->item;
+			break;
 		else
-		tmp=tmp->next;
+			tmp=tmp->next;
 	}
 	//TODO: Catch error when index is out of range
+	return tmp->item;
 }
 
 
@@ -277,11 +280,12 @@ const T& QList<T>::operator[](unsigned int index) const
 	for(int i=0;i<=index&&tmp!=NULL;i++)
 	{
 		if(i==index)
-		return tmp->item;
+			break;
 		else
-		tmp=tmp->next;
+			tmp=tmp->next;
 	}
 	//TODO: Catch error when index is out of range
+	return tmp->item;
 }
 
 #endif
